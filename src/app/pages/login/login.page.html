@@ -3,7 +3,7 @@
 <ion-content [fullscreen]="true">
 
   <div class="d-flex-center">
-    <form [formGroup]="form" class="auth-form">
+    <form [formGroup]="form" class="auth-form" (ngSubmit)="submit()" (keypress.enter)="submit()">
 
       <app-input-info 
       autocomplete="mail"
@@ -14,8 +14,8 @@
       ></app-input-info>
 
       <div class="validators" **ngFor="form.controls.email.errors && form.controls.email.touched">
-        <div *ngFor="form.controls.email.errors.[required]">El campo es requerido</div>
-        <div *ngFor="form.controls.email.errors.[email]">Ingresa un correo electronico valido</div>
+        <div *ngIf="form.controls.email.errors?.['required']">El campo es requerido</div>
+        <div *ngIf="form.controls.email.errors?.['email']">Ingresa un correo electronico valido</div>
       </div>
   
       <app-input-info 
@@ -27,8 +27,12 @@
       ></app-input-info>
 
       <div class="validators" **ngFor="form.controls.password.errors && form.controls.password.touched">
-        <div *ngFor="form.controls.password.errors.[required]">El campo es requerido</div>
+        <div *ngIf="form.controls.password.errors?.['required']">El campo es requerido</div>
       </div>
+
+      <ion-button  expand="block" mode="ios" class="submit" type="submit" [disabled]="form.invalid">
+        Click me
+      </ion-button>
   
     </form>
   </div>
