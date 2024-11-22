@@ -12,7 +12,15 @@ export class HomePage implements OnInit {
   firebaseSvc= inject(FirebaseService);
   utilsSvc= inject(UtilsService);
 
+  micelaneos: any[] = [];
+
+  constructor(private firebaseService: FirebaseService) {}
+
+  //---------------Traer lista de articulos--------------
   ngOnInit() {
+    this.firebaseService.getMicelaneosWithProveedor().subscribe((data) => {
+      this.micelaneos = data;
+    });
   }
 
   singOut(){

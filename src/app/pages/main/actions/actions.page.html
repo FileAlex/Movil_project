@@ -1,5 +1,43 @@
 <app-header title="Acciones"></app-header>
 
 <ion-content [fullscreen]="true">
-  
+    <div class="accion-form">
+        <h2>Registrar Entrada/Salida de Producto</h2>
+        <form (ngSubmit)="onRegistrarOperacion()">
+          <div>
+            <label for="idProducto">ID del Producto:</label>
+            <input 
+              type="text" 
+              id="idProducto" 
+              [(ngModel)]="idProducto" 
+              name="idProducto" 
+              placeholder="Ingrese el ID del producto" 
+              required>
+          </div>
+          <div>
+            <label for="cantidad">Cantidad:</label>
+            <input 
+              type="number" 
+              id="cantidad" 
+              [(ngModel)]="cantidad" 
+              name="cantidad" 
+              placeholder="Ingrese la cantidad" 
+              min="1" 
+              required>
+          </div>
+          <div>
+            <label for="accion">Acción:</label>
+            <select 
+              id="accion" 
+              [(ngModel)]="accion" 
+              name="accion" 
+              required>
+              <option value="entrada">Entrada</option>
+              <option value="salida">Salida</option>
+            </select>
+          </div>
+          <button type="submit">Registrar Operación</button>
+        </form>
+        <p *ngIf="mensaje">{{ mensaje }}</p>
+      </div>
 </ion-content>

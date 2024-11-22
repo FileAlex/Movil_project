@@ -1,5 +1,20 @@
 <app-header title="Reportes"></app-header>
 
 <ion-content [fullscreen]="true">
-  
+    <div class="reportes-container">
+        <h2>Reportes de Acciones</h2>
+        <div *ngIf="mensaje" class="error-message">{{ mensaje }}</div>
+        <div *ngIf="reportes.length === 0 && !mensaje" class="no-data">
+          No hay acciones registradas.
+        </div>
+        <div class="tarjetas">
+          <div class="tarjeta" *ngFor="let reporte of reportes">
+            <h3>{{ reporte.materialNombre }}</h3>
+            <p><strong>Acción:</strong> {{ reporte.Accion }}</p>
+            <p><strong>Cantidad:</strong> {{ reporte.Cantidad }}</p>
+            <p><strong>Fecha:</strong> {{ reporte.Fecha}}</p>
+            <p><strong>Hora:</strong> {{ reporte.Hora }}</p>
+          </div>
+        </div>
+      </div>
 </ion-content>
