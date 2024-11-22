@@ -22,7 +22,7 @@ export class NoAuthGuard implements CanActivate {
           if(!auth){ resolve(true);
           }
         else{
-          this.utilSvc.routerLink('/home');
+          this.utilSvc.routerLink('/main/home');
           resolve(false);
         }
         })
