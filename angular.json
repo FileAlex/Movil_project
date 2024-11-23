@@ -16,6 +16,8 @@
             "outputPath": "www",
             "index": "src/index.html",
             "main": "src/main.ts",
+            "serviceWorker": true,
+            "ngswConfigPath": "ngsw-config.json",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
@@ -80,7 +82,7 @@
               "buildTarget": "app:build:development"
             },
             "ci": {
-              "progress": false
+              
             }
           },
           "defaultConfiguration": "development"
