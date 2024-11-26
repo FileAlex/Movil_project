@@ -14,7 +14,11 @@
       ></app-input-info>
 
       <div class="validators" *ngIf="form.controls.email.errors && form.controls.email.touched">
+<<<<<<< HEAD
         <div *ngIf="form.controls.email.errors?.['required']">El correo electronico es requerido</div>
+=======
+        <div *ngIf="form.controls.email.errors?.['required']">El mail es requerido</div>
+>>>>>>> Cesar
         <div *ngIf="form.controls.email.errors?.['email']">Ingresa un correo electronico valido</div>
       </div>
   
@@ -30,9 +34,10 @@
         <div *ngIf="form.controls.password.errors?.['required']">La contraseña es requerida</div>
       </div>
 
-      
-      <ion-button expand="block" class="submit" type="submit" [disabled]="form.invalid">
-        Ingresar
+
+      <ion-button  expand="block" mode="ios" class="submit" type="submit" [disabled]="form.invalid">
+        Iniciar Sesion
+
       </ion-button>
   
     </form>

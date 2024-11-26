@@ -2,9 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
-  selector: 'app-input-info',
-  templateUrl: './input-info.component.html',
-  styleUrls: ['./input-info.component.scss'],
+    selector: 'app-input-info',
+    templateUrl: './input-info.component.html',
+    styleUrls: ['./input-info.component.scss'],
+    standalone: false
 })
 export class InputInfoComponent  implements OnInit {
 
