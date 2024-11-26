@@ -3,9 +3,10 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
-  selector: 'app-reports',
-  templateUrl: './reports.page.html',
-  styleUrls: ['./reports.page.scss'],
+    selector: 'app-reports',
+    templateUrl: './reports.page.html',
+    styleUrls: ['./reports.page.scss'],
+    standalone: false
 })
 export class ReportsPage implements OnInit {
 

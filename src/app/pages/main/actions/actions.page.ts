@@ -4,9 +4,10 @@ import { UtilsService } from 'src/app/services/utils.service';
 
 
 @Component({
-  selector: 'app-actions',
-  templateUrl: './actions.page.html',
-  styleUrls: ['./actions.page.scss'],
+    selector: 'app-actions',
+    templateUrl: './actions.page.html',
+    styleUrls: ['./actions.page.scss'],
+    standalone: false
 })
 export class ActionsPage implements OnInit {
 
