@@ -76,6 +76,7 @@ getMicelaneosWithProveedor(): Observable<any[]> {
   // Obtén la lista de micelaneos
   return collectionData(micelaneosRef, { idField: 'ID_M' }).pipe(
     switchMap((micelaneos: any[]) => {
+      
       // Para cada micelaneo, obtenemos su proveedor
       const micelaneoObservables = micelaneos.map((micelaneo) => {
         const proveedorRef = doc(firestore, `Proveedor/${micelaneo.proveedor}`);
