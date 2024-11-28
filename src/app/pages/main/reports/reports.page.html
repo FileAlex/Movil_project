@@ -1,7 +1,7 @@
 <app-header title="Reportes"></app-header>
 
 <ion-content [fullscreen]="true">
-    <div class="reportes-container">
+    <div class="reportes-container"> 
         <h2>Reportes de Acciones</h2>
         <div *ngIf="mensaje" class="error-message">{{ mensaje }}</div>
         <div *ngIf="reportes.length === 0 && !mensaje" class="no-data">

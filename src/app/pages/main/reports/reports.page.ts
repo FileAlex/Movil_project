@@ -8,7 +8,7 @@ import { UtilsService } from 'src/app/services/utils.service';
   styleUrls: ['./reports.page.scss'],
 })
 export class ReportsPage implements OnInit {
-
+ 
   firebaseSvc= inject(FirebaseService);
   utilsSvc= inject(UtilsService);
 
