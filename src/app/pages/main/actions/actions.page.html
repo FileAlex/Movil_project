@@ -9,9 +9,9 @@
     <div>
       <label for="producto">Seleccionar Producto:</label>
       <select id="producto" [(ngModel)]="idProducto" name="producto" required>
-        <!-- Mostrar productos obtenidos de Firestore -->
-        <option *ngFor="let producto of productos" [value]="producto.id">
-          {{ producto.Nombre }}  <!-- Asegúrate de que el campo 'Nombre' existe en tu base de datos -->
+        <option value="" disabled selected>Seleccione un producto</option>
+        <option *ngFor="let producto of productos" [value]="producto.ID_M">
+          {{ producto.Nombre }}
         </option>
       </select>
     </div>

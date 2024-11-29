@@ -105,8 +105,16 @@ export class FirebaseService {
 
   //===================================== Crear Reportes =============================//
   // Método para obtener la lista de productos
-  getProductos(): Observable<Producto[]> {
-    return this.firestore.collection<Producto>('productos').valueChanges();
+  getProductos(): Observable<any[]> {
+    return this.firestore.collection('Micelaneos').snapshotChanges().pipe(
+      map(actions =>
+        actions.map(a => {
+          const data = a.payload.doc.data() as any;
+          const id = a.payload.doc.id; // ID del documento de Firebase
+          return { idFirebase: id, ID_M: data.ID_M, Nombre: data.Nombre }; // Incluye ID_M y otros datos
+        })
+      )
+    );
   }
 
   // Método para registrar una operación de entrada o salida
@@ -137,26 +145,29 @@ export class FirebaseService {
    */
   async actualizarStock(idProducto: string, cantidad: number, accion: 'entrada' | 'salida'): Promise<void> {
     const firestore = getFirestore();
-    const productoRef = doc(firestore, `Micelaneos/${idProducto}`);
-
-    // Obtener datos del producto
-    const productoSnap = await getDoc(productoRef);
-    if (!productoSnap.exists()) {
+    const productosRef = collection(firestore, 'Micelaneos');
+  
+    // Busca el producto por ID_M
+    const q = query(productosRef, where('ID_M', '==', idProducto));
+    const querySnapshot = await getDocs(q);
+  
+    if (querySnapshot.empty) {
       throw new Error('Producto no encontrado.');
     }
-
-    const productoData = productoSnap.data();
-    const stockActual = productoData?.['Stock'] || 0;
-
-    // Validar y calcular el nuevo stock
+  
+    const productoDoc = querySnapshot.docs[0]; // Obtén el primer documento que coincide
+    const productoData = productoDoc.data();
+    const stockActual = productoData['Stock'] || 0;
+  
+    // Calcula el nuevo stock
     const nuevoStock = accion === 'entrada' ? stockActual + cantidad : stockActual - cantidad;
-
+  
     if (nuevoStock < 0) {
       throw new Error('No hay suficiente stock para realizar esta salida.');
     }
-
-    // Actualizar el stock en Firestore
-    await updateDoc(productoRef, { Stock: nuevoStock });
+  
+    // Actualiza el stock
+    await updateDoc(productoDoc.ref, { Stock: nuevoStock });
   }
 
   /**

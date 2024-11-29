@@ -31,7 +31,6 @@ export class ActionsPage implements OnInit {
   obtenerProductos() {
     this.firebaseService.getProductos().subscribe({
       next: (productos) => {
-        console.log('Productos:', productos);  // Verifica si los productos se están recibiendo correctamente
         this.productos = productos;
       },
       error: (error) => {
@@ -43,11 +42,22 @@ export class ActionsPage implements OnInit {
   // Función para registrar la operación (entrada/salida de producto)
   async onRegistrarOperacion() {
     try {
-      // Lógica de registro de la operación
-      this.mensaje = 'Operación realizada con éxito.';
+      if (!this.idProducto) {
+        throw new Error('Por favor selecciona un producto.');
+      }
+  
+      if (this.cantidad <= 0) {
+        throw new Error('La cantidad debe ser mayor a 0.');
+      }
+  
+      // Llama al servicio para manejar la operación
+      await this.firebaseSvc.manejarOperacion(this.idProducto, this.cantidad, this.accion);
+  
+      this.mensaje = 'Operación registrada con éxito.';
     } catch (error: any) {
-      this.mensaje = error.message || 'Ocurrió un error.';
+      this.mensaje = error.message || 'Ocurrió un error al registrar la operación.';
     }
   }
+  
 
 }
