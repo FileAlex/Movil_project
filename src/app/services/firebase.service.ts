@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { Observable, combineLatest, map, switchMap, from } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile,sendPasswordResetEmail } from 'firebase/auth'
 import { User } from '../models/user.model';
 import { getFirestore, setDoc, getDoc, doc, Firestore, collection, collectionData, docData, updateDoc, serverTimestamp } from '@angular/fire/firestore'
 import { AngularFirestore } from '@angular/fire/compat/firestore'
@@ -51,7 +51,10 @@ export class FirebaseService {
     localStorage.removeItem('user');
     this.utilSvc.routerLink('/login')
   }
-
+//=============Enviar email para recuperar la contraseña============
+  sendRecoveryEmail(email:string){
+return sendPasswordResetEmail(getAuth(),email);
+  }
   //=================Base de datos=================================
 
   //-----------Setear un documento ---------
